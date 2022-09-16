@@ -1,6 +1,5 @@
-package sparseArrayDemo01;
+package sparseArrayDemo;
 
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.FileReader;
 import cn.hutool.core.io.file.FileWriter;
 
