@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 /**
  * @author fym
- * @date 2022/9/16 10:50
+ * @date 2022/9/17 18:21
  */
-public class QueueArrayDemo {
+public class CircleQueueDemo {
     public static void main(String[] args) {
-        QueueArray queueArray = new QueueArray(3);
+        CircleQueue circleQueue = new CircleQueue(6);
         Scanner scanner = new Scanner(System.in);
         char key = ' ';
         Boolean loop = true;
@@ -24,18 +24,18 @@ public class QueueArrayDemo {
             {
                 case 's':
                     try {
-                        queueArray.showQueue();
+                        circleQueue.showQueue();
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                     break;
                 case 'a':
                     int num = scanner.nextInt();
-                    queueArray.addQueue(num);
+                    circleQueue.addQueue(num);
                     break;
                 case 'g':
                     try {
-                        int queue = queueArray.getQueue();
+                        int queue = circleQueue.getQueue();
                         System.out.printf("取出的队列为：%d",queue);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -43,7 +43,7 @@ public class QueueArrayDemo {
                     break;
                 case 'h':
                     try {
-                        int header = queueArray.getHeader();
+                        int header = circleQueue.getHeader();
                         System.out.printf("取出的头队列为：%d",header);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -57,37 +57,34 @@ public class QueueArrayDemo {
         }
         System.out.println("===程序退出===");
     }
+
 }
 
 /**
- * - 创建QueueAarry类，构造初始化数组。
- *   - front =-1   rear=-1
- *
- * - addQueue添加 将尾指针往后移：rear + 1。
- * - getQueue获取  将头指针往后移 ：front + 1
- * - isEmpty 判空 rear  =  front  则队列数组为空。
- * - isFull 判满 rear =  MaxSize - 1则队列数组为满。
- * - showQueue 获取所有队列数值。
- * - getHeader 获取 数组队列头一个数值。
- * - exitSys 退出系统
- *
+ * maxSize = 6
+ * 判空：rear == front
+ * rear 指向队列的最后一个元素的后一个位置（流出一个空间做约定） 初始值为0
+ * rear == （rear + 1）% maxSize
+ * 判满：(rear + 1) % maxSize == front
+ * front 指向队列的第一个元素 初始值为0
+ * front == (front + 1) % maxSize 
+ * 有效数据个数：（rear + maxSize - front）% maxSize
  */
 
-class QueueArray{
+class CircleQueue{
 
     private int maxSize;
     private int front;
     private int rear;
     private int[] arr;
 
+
     /**
      * 构造初始化数组
      */
-    public QueueArray(int arrMaxSize){
+    public CircleQueue(int arrMaxSize){
         maxSize = arrMaxSize;
         arr = new int[maxSize];
-        front = -1;
-        rear = -1;
     }
 
     /**
@@ -107,7 +104,7 @@ class QueueArray{
      * @return boolean
      */
     public Boolean isFull(){
-        if (rear == maxSize - 1)
+        if ((rear + 1) % maxSize == front)
         {
             return true;
         }
@@ -124,8 +121,8 @@ class QueueArray{
             System.out.println("======数值队列为满 不能进行添加======");
             return;
         }
-        rear++;
         arr[rear] = n;
+        rear = (rear + 1) % maxSize;
         System.out.printf("rear的值为%d\n",rear);
     }
 
@@ -137,11 +134,12 @@ class QueueArray{
         {
             throw new RuntimeException("数组队列为空！");
         }
-        front++;
+        // 保留front对应的数值、
+        int value = arr[front];
+        front = (front + 1) % maxSize;
         System.out.printf("front的值为%d\n",front);
-        return arr[front];
+        return value;
     }
-
 
     /**
      * 获取所有队列数值。
@@ -149,11 +147,15 @@ class QueueArray{
     public void showQueue(){
         if (isEmpty())
         {
-            throw new RuntimeException("数组队列为空！"); 
+            throw new RuntimeException("数组队列为空！");
         }
-        for (int i = 0; i < arr.length; i++) {
-            System.out.printf("arr[%d]=%d\n",i,arr[i]);
+        for (int i = front; i < front + size(); i++) {
+            System.out.printf("arr[%d]=%d\n",i % maxSize,arr[i % maxSize]);
         }
+    }
+
+    public int size(){
+        return (rear + maxSize - front) % maxSize;
     }
 
     /**
@@ -165,10 +167,7 @@ class QueueArray{
         {
             throw new RuntimeException("数组队列为空！");
         }
-        return arr[front + 1];
+        return arr[front];
     }
-
-
-
 
 }
