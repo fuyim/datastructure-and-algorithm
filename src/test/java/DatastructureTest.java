@@ -10,7 +10,7 @@ public class DatastructureTest {
     @Test
     public void test01(){
         int maxSize = 6;
-        int rear = 1;
+        int rear = 0;
         int front = 0;
         rear = (rear + 1) % maxSize;
         System.out.printf("rear的值为：%d\n",rear);

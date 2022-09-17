@@ -154,13 +154,17 @@ class CircleQueue{
         }
     }
 
+    /**
+     *
+     * @return 队列中有效的数据个数
+     */
     public int size(){
         return (rear + maxSize - front) % maxSize;
     }
 
     /**
-     * 取 数组队列头一个数值。
-     * @return
+     *
+     * @return 取数组队列头一个数值。
      */
     public int getHeader(){
         if (isEmpty())
