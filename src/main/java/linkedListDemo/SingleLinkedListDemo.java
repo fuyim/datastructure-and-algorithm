@@ -9,13 +9,19 @@ public class SingleLinkedListDemo {
     public static void main(String[] args) {
         SingleLinkedList singleLinkedList = new SingleLinkedList();
         HeroNode hero1 = new HeroNode(1,"宋江","及时雨");
-        HeroNode hero2 = new HeroNode(2,"林冲","豹子头");
-        HeroNode hero3 = new HeroNode(3,"吴用","智多星");
-        HeroNode hero4 = new HeroNode(4,"卢俊义","玉麒麟");
-        singleLinkedList.add(hero1);
-        singleLinkedList.add(hero2);
-        singleLinkedList.add(hero3);
-        singleLinkedList.add(hero4);
+        HeroNode hero2 = new HeroNode(5,"林冲","豹子头");
+        HeroNode hero3 = new HeroNode(7,"吴用","智多星");
+        HeroNode hero4 = new HeroNode(3,"卢俊义","玉麒麟");
+//        singleLinkedList.add(hero1);
+//        singleLinkedList.add(hero2);
+//        singleLinkedList.add(hero3);
+//        singleLinkedList.add(hero4);
+
+        singleLinkedList.addByOrder(hero1);
+        singleLinkedList.addByOrder(hero3);
+        singleLinkedList.addByOrder(hero4);
+        singleLinkedList.addByOrder(hero2);
+        singleLinkedList.addByOrder(hero2);
         singleLinkedList.list();
     }
 
@@ -30,7 +36,7 @@ class SingleLinkedList{
 
     /**
      * 2. 初始化头结点
-     *   2.1. 第一种方法：使用带head头的单向链表实现
+     *   2.1. 第一种方法：添加英雄时，直接添加到链表的尾部
      *      1) 找到链表的最后一个节点：
      *      2) 将链表的最后一个节点指向新的节点；
      */
@@ -47,6 +53,45 @@ class SingleLinkedList{
             temp = temp.next;
         }
         temp.next = heroNode;
+    }
+
+
+    /**
+     *  第二种方法：第二种方式在添加英雄时，根据排名将英雄插入到指定位置
+     *   1) 找到新添加节点的位置
+     *   2) 将新节点.next = temp.next
+     *   3) temp.next = 将新节点
+     */
+    public void addByOrder(HeroNode heroNode){
+
+        HeroNode temp = head;
+        Boolean flag = false;
+
+        while (true)
+        {
+            if (temp.next == null)
+            {
+                break;
+            }
+            if (temp.next.no > heroNode.no)
+            {
+                break;
+            }else if (temp.next.no == heroNode.no)
+            {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+
+        }
+        if (flag)
+        {
+            System.out.println("准备插入的编号："+heroNode.no+"已经存在不能再进行插入");
+        }else {
+            heroNode.next = temp.next;
+            temp.next = heroNode;
+        }
+
     }
 
     /**
