@@ -1,5 +1,7 @@
 package linkedListDemo;
 
+import java.util.Stack;
+
 /**
  * @author fym
  * @date 2022/9/18 14:35
@@ -23,6 +25,10 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(hero2);
         singleLinkedList.addByOrder(hero2);
         singleLinkedList.list();
+
+        System.out.println("=====从头到尾打印====");
+        singleLinkedList.reversePrint(singleLinkedList.getHead());
+
         singleLinkedList.reverseList(singleLinkedList.getHead());
         singleLinkedList.list();
         /*
@@ -50,6 +56,38 @@ class SingleLinkedList{
      * 1. 初始化头结点
      */
     private HeroNode head = new HeroNode(0,"","");
+
+
+    /**
+     * 从尾到头打印单链表
+     * 1. 将各个节点压入栈中，利用栈的先进后出的特点遍历。
+     * @param head 头节点
+     */
+    public void reversePrint(HeroNode head){
+        if (head.next == null)
+        {
+            System.out.println("单项链表为空！");
+            return;
+        }
+
+        Stack<HeroNode> stackHeroNode = new Stack<HeroNode>();
+        HeroNode temp = head.next;
+        while (true)
+        {
+            stackHeroNode.push(temp);
+            temp = temp.next;
+            if (temp == null)
+            {
+                break;
+            }
+        }
+
+        while (stackHeroNode.size() > 0)
+        {
+            System.out.println(stackHeroNode.pop());
+        }
+
+    }
 
 
     /**
