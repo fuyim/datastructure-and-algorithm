@@ -23,6 +23,9 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(hero2);
         singleLinkedList.addByOrder(hero2);
         singleLinkedList.list();
+        HeroNode hero5 = new HeroNode(5,"小林","豹子头~~");
+        singleLinkedList.update(hero5);
+        singleLinkedList.list();
     }
 
 }
@@ -95,9 +98,54 @@ class SingleLinkedList{
     }
 
     /**
+     * 根据节点编号进行更改
+     * 1. 找到与temp.no编号相等的HeroNode 即temp.no == HeroNode.no
+     * 2. 将 HeroNode.name,HeroNode.nickName赋值给temp   
+     * @param heroNode 要更改的节点
+     */
+    public void update(HeroNode heroNode){
+
+        if (head.next == null)
+        {
+            System.out.println("链表为空！");
+            return;
+        }
+
+        HeroNode temp = head.next;
+        Boolean flag = false;
+        while (true)
+        {
+
+            if (temp.next == null)
+            {
+                System.out.println("链表已经遍历完毕！");
+                break;
+            }
+
+            if (temp.no == heroNode.no)
+            {
+                flag = true;
+                break;
+            }
+
+            temp = temp.next;
+        }
+        if (flag)
+        {
+            temp.name = heroNode.name;
+            temp.nickName = heroNode.nickName;
+        }else {
+            System.out.println("找不到该节点！");
+        }
+
+
+    }
+
+    /**
      * 遍历
      */
     public void list(){
+        System.out.println("=====遍历开始======");
         if (head.next == null)
         {
             System.out.println("链表为空！");
@@ -114,7 +162,7 @@ class SingleLinkedList{
             System.out.println(temp);
             temp = temp.next;
         }
-
+        System.out.println("=====遍历结束======");
     }
 
 }
