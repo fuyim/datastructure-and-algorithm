@@ -26,6 +26,10 @@ public class SingleLinkedListDemo {
         HeroNode hero5 = new HeroNode(5,"小林","豹子头~~");
         singleLinkedList.update(hero5);
         singleLinkedList.list();
+        singleLinkedList.del(1);
+        singleLinkedList.del(7);
+        singleLinkedList.list();
+
     }
 
 }
@@ -136,6 +140,45 @@ class SingleLinkedList{
             temp.nickName = heroNode.nickName;
         }else {
             System.out.println("找不到该节点！");
+        }
+    }
+
+
+    /**
+     * 根据编号no删除节点
+     * 1. 找到要删除节点的前一个节点
+     * 2. 将temp.next = temp.next.next
+     * @param no 要删除节点的编号
+     */
+    public void del(int no){
+
+        if (head.next == null)
+        {
+            System.out.println("该单向列表为空！");
+            return;
+        }
+        HeroNode temp = head;
+        Boolean flag = false;
+        while (true)
+        {
+            if (temp.next == null)
+            {
+                break;
+            }
+
+            if (temp.next.no == no)
+            {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+
+        if (flag)
+        {
+            temp.next = temp.next.next;
+        }else {
+            System.out.println("删除的节点为空！");
         }
 
 
