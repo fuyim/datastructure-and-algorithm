@@ -23,6 +23,9 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(hero2);
         singleLinkedList.addByOrder(hero2);
         singleLinkedList.list();
+        singleLinkedList.reverseList(singleLinkedList.getHead());
+        singleLinkedList.list();
+        /*
         HeroNode hero5 = new HeroNode(5,"小林","豹子头~~");
         singleLinkedList.update(hero5);
         singleLinkedList.list();
@@ -36,6 +39,7 @@ public class SingleLinkedListDemo {
         int index = 2;
         HeroNode lastListIndexNode = singleLinkedList.getLastListIndexNode(singleLinkedList.getHead(), index);
         System.out.println("单项链表的倒数第"+index+"的节点为："+lastListIndexNode);
+        */
     }
 
 }
@@ -47,6 +51,36 @@ class SingleLinkedList{
      */
     private HeroNode head = new HeroNode(0,"","");
 
+
+    /**
+     * 单项链表的反转
+     * 1. 定义一个新的头结点 reverseHead
+     * 2. 遍历，每次遍历将节点放入reverseHead的前端
+     * 3. 将head.next = reverseHead.next
+     * @param head 头节点
+     */
+    public void reverseList(HeroNode head){
+        if (head.next == null || head.next.next == null)
+        {
+            return;
+        }
+
+        HeroNode cur = head.next;
+        HeroNode next = null;
+        HeroNode reverseHead = new HeroNode(0,"","");
+        while (true)
+        {
+            next = cur.next;
+            cur.next = reverseHead.next;
+            reverseHead.next = cur;
+            cur = next;
+            if (cur == null)
+            {
+                break;
+            }
+        }
+        head.next = reverseHead.next;
+    }
 
     /**
      * 查找单链表倒数第k个节点
