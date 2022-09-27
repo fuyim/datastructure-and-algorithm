@@ -12,17 +12,17 @@ public class DoubleLinkedListDemo {
         HeroNode2 hero3 = new HeroNode2(7,"吴用","智多星");
         HeroNode2 hero4 = new HeroNode2(3,"卢俊义","玉麒麟");
 
-        doubleLinkedList.add(hero1);
-        doubleLinkedList.add(hero3);
-        doubleLinkedList.add(hero4);
-        doubleLinkedList.add(hero2);
+        doubleLinkedList.addByOrder(hero1);
+        doubleLinkedList.addByOrder(hero3);
+        doubleLinkedList.addByOrder(hero4);
+        doubleLinkedList.addByOrder(hero2);
         doubleLinkedList.list();
 
         HeroNode2 hero5 = new HeroNode2(5,"小林","豹子头~~");
         doubleLinkedList.update(hero5);
         doubleLinkedList.list();
 
-//        doubleLinkedList.del(1);
+        doubleLinkedList.del(1);
         doubleLinkedList.del(7);
         doubleLinkedList.list();
     }
@@ -137,37 +137,41 @@ class DoubleLinkedList{
      * 双向链表顺序添加
      * @param heroNode 要添加的节点
      */
-//    public void addByOrder(HeroNode2 heroNode){
-//
-//        HeroNode2 temp = head;
-//        Boolean flag = false;
-//
-//        while (true)
-//        {
-//            if (temp.next == null)
-//            {
-//                break;
-//            }
-//            if (temp.next.no > heroNode.no)
-//            {
-//                break;
-//            }else if (temp.next.no == heroNode.no)
-//            {
-//                flag = true;
-//                break;
-//            }
-//            temp = temp.next;
-//
-//        }
-//        if (flag)
-//        {
-//            System.out.println("准备插入的编号："+heroNode.no+"已经存在不能再进行插入");
-//        }else {
-//            heroNode.next = temp.next;
-//            temp.next = heroNode;
-//        }
-//
-//    }
+    public void addByOrder(HeroNode2 heroNode){
+
+        HeroNode2 temp = head;
+        Boolean flag = false;
+        while (true)
+        {
+            if (temp.next == null)
+            {
+                break;
+            }
+            if (temp.next.no > heroNode.no)
+            {
+                break;
+            }else if (temp.next.no == heroNode.no)
+            {
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+
+        }
+        if (flag)
+        {
+            System.out.println("准备插入的编号："+heroNode.no+"已经存在不能再进行插入");
+        }else {
+            if (temp.next != null)
+            {
+                temp.next.pre = heroNode;
+            }
+            heroNode.next = temp.next;
+            temp.next = heroNode;
+            heroNode.pre = temp;
+        }
+
+    }
 
     /**
      * 遍历
