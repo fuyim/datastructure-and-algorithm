@@ -59,6 +59,14 @@ class SingleLinkedList{
 
 
     /**
+     * 合并两个有序的单链表，合并之后的链表依然有序
+     * @param head 头节点
+     */
+    public void mergeLinkedList(HeroNode head){
+
+    }
+
+    /**
      * 从尾到头打印单链表
      * 1. 将各个节点压入栈中，利用栈的先进后出的特点遍历。
      * @param head 头节点
