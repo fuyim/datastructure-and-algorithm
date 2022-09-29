@@ -5,6 +5,7 @@ import java.util.Scanner;
 /**
  * @author fym
  * @date 2022/9/16 10:50
+ * 数组模拟队列代码实现
  */
 public class QueueArrayDemo {
     public static void main(String[] args) {

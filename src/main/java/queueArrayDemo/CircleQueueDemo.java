@@ -5,6 +5,7 @@ import java.util.Scanner;
 /**
  * @author fym
  * @date 2022/9/17 18:21
+ * 数组模拟环形队列代码实现
  */
 public class CircleQueueDemo {
     public static void main(String[] args) {

@@ -5,6 +5,7 @@ import java.util.Stack;
 /**
  * @author fym
  * @date 2022/9/18 14:35
+ * 单向链表代码实现
  */
 public class SingleLinkedListDemo {
 
