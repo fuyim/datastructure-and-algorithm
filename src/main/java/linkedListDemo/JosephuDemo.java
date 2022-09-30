@@ -11,6 +11,8 @@ public class JosephuDemo {
         CircleSingleLinkedList circleSingleLinkedList = new CircleSingleLinkedList();
         circleSingleLinkedList.addBoy(5);
         circleSingleLinkedList.showBoy();
+
+        circleSingleLinkedList.countBoy(1,2,5);
     }
 }
 
@@ -21,6 +23,54 @@ class CircleSingleLinkedList{
      */
 
     Boy first = null;
+
+
+    /**
+     * 计算小孩出圈
+     * @param startNo 开始编号
+     * @param countNum 数几个
+     * @param nums 一共几个
+     */
+    public void countBoy(int startNo,int countNum,int nums){
+        if(first == null || startNo < 1 || startNo > nums)
+        {
+            System.out.println("你输入的参数违法！|");
+            return;
+        }
+        // 1.创建一个辅助变量，指向环形链表的最后一个结点
+        Boy helper = first;
+        while (true)
+        {
+            if (helper.getNext() == first)
+            {
+                break;
+            }
+            helper = helper.getNext();
+        }
+        // 2.小孩报数之前，先让first和helper移动startNo - 1次1
+        for (int i = 0; i < startNo - 1; i++) {
+            first = first.getNext();
+            helper = helper.getNext();
+        }
+
+        while (true)
+        {
+           if (helper == first)
+           {
+               break;
+           }
+           // 3.当小孩报数时,让first和helper指针同时移动countNum-1次
+            for (int i = 0 ; i < countNum - 1; i++) {
+                first = first.getNext();
+                helper = helper.getNext();
+            }
+
+            System.out.println("小孩出圈："+first.getNo());
+            first = first.getNext();
+            helper.setNext(first);
+        }
+        System.out.println("最后留在圈中的小孩为："+first.getNo());
+    }
 
     /**
      * 添加节点
