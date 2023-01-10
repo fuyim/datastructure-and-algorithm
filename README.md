@@ -1,5 +1,5 @@
 # 数据结构与算法分析
-
+[![Security Status](https://www.murphysec.com/platform3/v3/badge/1610448892957601792.svg?t=1)](https://www.murphysec.com/accept?code=03c88fca1ad0c22dcb19f8b908880791&type=1&from=2&t=2)
 ## 一 . 数据结构与算法的概述
 
 ### 1.1 数据结构和算法的关系
